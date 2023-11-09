@@ -1,38 +1,121 @@
 #include <iostream>
 #include "Recurso1.h"
 #include "Recurso3.h"
+#include <random>
 using namespace std;
 void menuCalculadora();
+void menuGestionEstudiantes();
 int main() {
-
     int decision;
-    cout<<"Que quieres hacer"<<endl;
-    cin>>decision;
-    switch(decision){
+    bool seguir = true;
+    while(seguir) {
+        cout << "Que quieres hacer" << endl;
+        cout << "1. Gestionar estudiantes" << endl;
+        cout << "2. Mochila de material digital" << endl;
+        cout << "3. Calculadora Avanzada" << endl;
+        cout << "4. Dar de alta o baja algun usuario" << endl;
+        cout << "5. Juego" << endl;
+        cout << "6. Salir del programa" << endl;
+        cin >> decision;
+        switch (decision) {
+            case 1:
+                menuGestionEstudiantes();
+                break;
+            case 2:
+                break;
+            case 3:
+                menuCalculadora();
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                seguir = false;
+                break;
+            default:
+                break;
+        }
+        return 0;
+    }
+}
+/**
+ * Menus para recurso 1
+ */
+void menuRegistrarse() {
+    bool seguir2 = true;
+    RegistroYLogin cyl = RegistroYLogin();
+    RegistroYLogin* pcyl = &cyl;
+    string nombre, apellido;
+    int numU;
+
+    while (seguir2) {
+        int decisionCargo;
+        cout << "Que cargo vas a ostentar?" << endl;
+        cout << "1. Profesor" << endl;
+        cout << "2. Alumno" << endl;
+        cout << "3. Salir" << endl;
+        cin >> decisionCargo;
+        int id = rand() % 1000 + 1;
+        bool cargo;
+
+        switch (decisionCargo) {
+            case 1:
+                cargo = true;
+                cout << "Introduce tu nombre" << endl;
+                cin >> nombre;
+                cout << "Introduce tu apellido" << endl;
+                cin >> apellido;
+                cout << "Introduce tu numero de usuario" << endl;
+                cin >> numU;
+                cout << "Tu id es el siguiente: " << id << ". Guardalo para iniciar sesion" << endl;
+                pcyl->addUsuario(Profesor(nombre, apellido, numU, id));
+                pcyl->leerUsuarios(cargo);
+                break;
+            case 2:
+                cargo = false;
+                cout << "Introduce tu nombre" << endl;
+                cin >> nombre;
+                cout << "Introduce tu apellido" << endl;
+                cin >> apellido;
+                cout << "Introduce tu numero de usuario" << endl;
+                cin >> numU;
+                cout << "Tu id es el siguiente: " << id << " Guardalo para iniciar sesion" << endl;
+                pcyl->addUsuario(Alumno(nombre, apellido, numU, Profesor("", "", 0, 0), id));
+                pcyl->leerUsuarios(cargo);
+                break;
+            case 3:
+                seguir2 = false;
+                break;
+            default:
+                cout << "Opcion erronea" << endl;
+                break;
+        }
+    }
+}
+
+void menuGestionEstudiantes(){
+    int decisionLogin;
+    cout<<"Que quieres hacer?"<<endl;
+    cout<<"1. Registrarse"<<endl;
+    cout<<"2. Iniciar sesion"<<endl;
+    cin>>decisionLogin;
+    switch(decisionLogin){
         case 1:
-            cout<<"Recurso 1"<<endl;
+            menuRegistrarse();
             break;
         case 2:
-            cout<<"Recurso 2"<<endl;
-            break;
-        case 3:
-            cout<<"Recurso 3"<<endl;
-            menuCalculadora();
-            break;
-        case 4:
-            cout<<"Recurso 4"<<endl;
-            break;
-        case 5:
-            cout<<"Recurso 5"<<endl;
             break;
         default:
             cout<<"Opcion erronea"<<endl;
             break;
     }
-    return 0;
-
 
 }
+
+/**
+ * Menus para recurso 3
+ */
 void menuCalcEnteros(){
     int decisionOperacion;
     bool salir = false;
@@ -242,7 +325,7 @@ void menuCalcDouble(){
                 cout << calcDouble.sumar(operador1, operador2) << endl;
                 break;
             case 2:
-                cout << "Introduzca el primer valor" << endl;
+                cout <<"Introduzca el primer valor" << endl;
                 cin >> operador1;
                 cout << "Introduzca el segundo valor" << endl;
                 cin >> operador2;
@@ -410,3 +493,4 @@ void menuCalculadora(){
     }
 
 }
+
