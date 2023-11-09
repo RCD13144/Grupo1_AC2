@@ -1,9 +1,11 @@
 /*
  * Este archivo contiene las clases usadas para el juego de numeros aleatorios
  */
-#include <random>
+
 #ifndef GRUPO1_AC2_RECURSO5_H
 #define GRUPO1_AC2_RECURSO5_H
+#include <random>
+#include <iostream>
 using namespace std;
 /**
  * Esta clase contiene los metodos y atributos de Juego

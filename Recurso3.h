@@ -6,12 +6,25 @@
 #define GRUPO1_AC2_RECURSO3_H
 #include <iostream>
 using namespace std;
+/**
+ * Declaracion de la clase de plantilla Matriz, contiene los metodos y atributos de Matriz
+ */
 template<typename T> class Matriz{
 private:
+    /**
+    * Atributos de la clase Matriz
+    * @param nFilas Numero de filas de la matriz
+    * @param nColumnas Numero de columnas de la matriz
+    */
     int nFilas;
     int nColumnas;
+
 public:
     T matriz[5][5];
+    /**
+     * Metodo constructor de Matriz
+     * Se inicia la matriz a 0
+     */
     Matriz(){
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 5 ; ++j) {
@@ -19,6 +32,9 @@ public:
             }
         }
     }
+    /**
+     * Metodo en el que se lleva a cabo el llenado de la matriz
+     */
     void llenarMatriz(int nFil, int nCol){
         T aux;
         if(nFil > 5 || nCol > 5){
@@ -37,6 +53,10 @@ public:
             }
         }
     }
+    /**
+     * Getters y setters para el numero de filas y columnas de la matriz
+     * @return numero de filas y columnas
+     */
     int getNFilas(){
         return nFilas;
     }
@@ -49,6 +69,9 @@ public:
     void setNColumnas(int n){
         nColumnas = n;
     }
+    /**
+     * @param m Array 5x5 para establecer la matriz
+     */
     void setMatriz(T m[5][5]){
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 5; ++j) {
@@ -56,6 +79,9 @@ public:
             }
         }
     }
+    /**
+     * Muestra la matriz
+     */
     void verMatriz(){
         for (int i = 0; i < 5; ++i) {
             cout << "" << endl;
@@ -66,22 +92,51 @@ public:
         cout << "" << endl;
     }
 };
+/**
+ * Declaracion de la clase de plantilla Calculadora, contiene los metodos y atributos de Calculadora
+ */
 template<typename T>class Calculadora{
 public:
     Calculadora(){
     }
+    /**
+     * @param operador1 Primer operando
+     * @param operador2 Segundo operando
+     * @return Suma de operador1 y operador2
+     */
     T sumar(T operador1, T operador2){
         return operador1+operador2;
     }
-    T restar(T operador1, T operador2){
+    /**
+     * @param operador1 Primer operando
+     * @param operador2 Segundo operando
+     * @return Resta entre operador1 y operador2
+     */
+    T restar(T operador1, T operador2) {
         return operador1 - operador2;
     }
+    /**
+     * @param operador1 Primer operando
+     * @param operador2 Segundo operando
+     * @return Producto entre operador1 y operador2
+     */
     T multiplicar(T operador1, T operador2){
         return operador1 * operador2;
     }
+    /**
+     * @param operador1 Primer operando
+     * @param operador2 Segundo operando
+     * @return Resultado de dividir operador1 y operador2
+     */
     T dividir(T operador1, T operador2){
         return operador1/operador2;
     }
+    // Operaciones de matriz
+    /**
+     * @param m1 Primera matriz
+     * @param m2 Segunda matriz
+     * @return Matriz resultante tras sumar m1 y m2
+     */
     Matriz<T> sumar(Matriz<T> m1, Matriz<T> m2){
         T arrayResult[5][5];
         Matriz<T> result;
@@ -93,6 +148,11 @@ public:
         result.setMatriz(arrayResult);
         return result;
     }
+    /**
+     * @param m1 Primera matriz
+     * @param m2 Segunda matriz
+     * @return Matriz resultante tras restar m2 de m1
+     */
     Matriz<T> restar(Matriz<T> m1, Matriz<T> m2){
         T arrayResult[5][5];
         Matriz<T> result;
@@ -104,6 +164,11 @@ public:
         result.setMatriz(arrayResult);
         return result;
     }
+    /**
+     * @param m1 Primera matriz
+     * @param m2 Segunda matriz
+     * @return Matriz resultante tras multiplicar m1 y m2
+     */
     Matriz<T> multiplicar(Matriz<T> m1, Matriz<T> m2){
         T arrayResult[5][5];
         Matriz<T> result;
@@ -127,6 +192,12 @@ public:
             throw "ERROR: No son iguales las columnas de M1 que las filas de M2";
         }
     }
+    /**
+     * @param m1 Matriz
+     * @param n Divisor
+     * @return Matriz resultante tras dividir m1 por un escalar 'n'
+     */
+
     Matriz<T> dividir(Matriz<T> m1, T n){
         Matriz<T> result;
         T arrayResult[5][5];
@@ -143,6 +214,12 @@ public:
             return result;
         }
     }
+    /**
+     * @param m1 Matriz
+     * @param n Divisor
+     * @return Matriz resultante tras multiplicar m1 por un escalar 'n'
+     */
+
     Matriz<T> multiplicar(Matriz<T> m1, T n){
         Matriz<T> result;
         T arrayResult[5][5];
