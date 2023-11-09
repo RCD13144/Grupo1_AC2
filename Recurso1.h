@@ -4,37 +4,37 @@
 
 #ifndef GRUPO1_AC2_RECURSO1_H
 #define GRUPO1_AC2_RECURSO1_H
-
 #include <string>
-
 using namespace std;
-class Profesor;
-class Alumno{
+class Usuario{
 private:
-    string nombre, apellido1, expediente;
-    int claseAlumno;
-    bool asignacion;
+    string nombre, apellido;
+    int numUsuario;
 public:
-    Alumno(){
-        Alumno::nombre = "";
-        Alumno::apellido1 = "";
-        Alumno::expediente = "";
-        Alumno::claseAlumno = 0;
-    }
-    Alumno(string n, string apel, string exp, int cl){
-        Alumno::nombre = n;
-        Alumno::apellido1 = apel;
-        Alumno::expediente = exp;
-        Alumno::claseAlumno = cl;
-    }
-    string toString(){
-        return "Alumno[" + nombre+", "+apellido1+", "+expediente+", "+claseAlumno<<"]";
-    }
-    void asingarProfesor(Alumno a){
-        asignacion = true;
+    Usuario(string n, string a, int numU){
+        Usuario::nombre = n;
+        Usuario::apellido = a;
+        Usuario::numUsuario = numU;
     }
 };
-class Profesor{
+
+
+class Alumno : public Usuario{
+private:
+    int claseAlumno;
+public:
+    Alumno() : Usuario(){
+
+    }
+    Alumno(int clase): Usuario(){
+    }
+    string toString(){
+        //return "Alumno[" + nombre+", "+apellido1+", "+expediente+", "+claseAlumno<<"]";
+    }
+    void asingarProfesor(Alumno a){
+    }
+};
+class Profesor : Usuario{
 private:
     Alumno lista[8];
     int control;
