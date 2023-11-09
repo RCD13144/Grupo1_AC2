@@ -8,33 +8,36 @@
 #include <string>
 
 using namespace std;
-class Profesor;
-class Alumno{
+class Usuario{
 private:
-    string nombre, apellido1, expediente;
-    int claseAlumno;
-    bool asignacion;
+    string nombre, apellido;
+    int numUsuario;
 public:
-    Alumno(){
-        Alumno::nombre = "";
-        Alumno::apellido1 = "";
-        Alumno::expediente = "";
-        Alumno::claseAlumno = 0;
+    Usuario(string n, string a, int numU){
+        Usuario::nombre = n;
+        Usuario::apellido = a;
+        Usuario::numUsuario = numU;
     }
-    Alumno(string n, string apel, string exp, int cl){
-        Alumno::nombre = n;
-        Alumno::apellido1 = apel;
-        Alumno::expediente = exp;
-        Alumno::claseAlumno = cl;
+    Usuario(){}
+};
+
+
+class Alumno : public Usuario{
+private:
+    int claseAlumno;
+public:
+    Alumno() : Usuario(){
+
+    }
+    Alumno(int clase): Usuario(){
     }
     string toString(){
-        return "Alumno[" + nombre+", "+apellido1+", "+expediente+", "+claseAlumno<<"]";
+        //return "Alumno[" + nombre+", "+apellido1+", "+expediente+", "+claseAlumno<<"]";
     }
     void asingarProfesor(Alumno a){
-        asignacion = true;
     }
 };
-class Profesor{
+class Profesor : Usuario{
 private:
     Alumno lista[8];
     int control;

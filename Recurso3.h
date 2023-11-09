@@ -127,9 +127,9 @@ public:
             throw "ERROR: No son iguales las columnas de M1 que las filas de M2";
         }
     }
-    Matriz<T> division(Matriz<T> m1, T n){
+    Matriz<T> dividir(Matriz<T> m1, T n){
         Matriz<T> result;
-        T arrayResult;
+        T arrayResult[5][5];
         if (n == 0){
             throw "ERROR: No se puede dividir entre cero";
         }
@@ -143,9 +143,9 @@ public:
             return result;
         }
     }
-    Matriz<T> multiplicacion(Matriz<T> m1, T n){
+    Matriz<T> multiplicar(Matriz<T> m1, T n){
         Matriz<T> result;
-        T arrayResult;
+        T arrayResult[5][5];
         for (int i = 0; i < 5; ++i) {
             for (int j = 0; j < 5; ++j) {
                 arrayResult[i][j] = m1.matriz[i][j] * n;
