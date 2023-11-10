@@ -47,7 +47,6 @@ void menuJuego(){
 
 void menuGestionUsuarios(){
     int decisionLogin;
-
     cout<<"Que quieres hacer?"<<endl;
     cout<<"1. Registrar nuevos usuarios"<<endl;
     cout<<"2. Iniciar sesion como un usuario"<<endl;
@@ -57,11 +56,6 @@ void menuGestionUsuarios(){
 
             break;
         case 2:
-            menuIniciarSesion();
-            break;
-        case 3:
-            break;
-        case 4:
             break;
         default:
             cout<<"Opcion erronea"<<endl;

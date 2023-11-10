@@ -29,6 +29,7 @@ public:
      * Se inicia el numero de intentos a 0
      */
     Juego(){
+        srand(time(0));
         numero_a_adivinar = rand() % 100 + 1;
         nIntentos = 0;
     }
