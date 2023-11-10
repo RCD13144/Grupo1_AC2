@@ -40,20 +40,15 @@ public:
     void setCargo(bool cargo){
         Usuario::cargo = cargo;
     }
-    string toString(bool cargo){
+    string toString(){
         stringstream  ss;
         ss<<getNumUsuario();
         string numUAString = ss.str();
         ss<<getId();
         string idAString = ss.str();
         string valor;
-        if (cargo == true){
-            valor = "Profesor";
-        }
-        else{
-            valor =  "Alumno";
-        }
-        return "["+valor+"("+nombre + ", "+apellido+", "+numUAString+", "+idAString+")]";
+
+        return "[("+nombre + ", "+apellido+", "+numUAString+", "+idAString+")]";
     }
 };
 class Alumno;
@@ -83,6 +78,7 @@ public:
 class Alumno : public Usuario{
 private:
     Profesor profesor;
+    Profesor listaProfesor[1];
 public:
     Alumno() : Usuario(){
     }
@@ -92,10 +88,19 @@ public:
     string toString(){
         return "Alumno = [nombre = " + getNombre() + ", apellido = " + getApellido() + ", numUsuario = " + to_string(getNumUsuario()) + ", " + profesor.toString() + ", id = " +to_string(getId())+ "]";
     }
+    void asociarProfesor(Profesor p){
+        Alumno::profesor = p;
+        listaProfesor[0] = p;
+    }
+    void verMiProfesor(){
+        cout<<listaProfesor[0].toString()<<endl;
+    }
 };
 class RegistroYLogin : public Usuario{
 private:
     Usuario listaUsuario[10];
+    Profesor p;
+    Alumno a;
     int control;
 public:
     RegistroYLogin(){
@@ -107,10 +112,25 @@ public:
         listaUsuario[control] = u;
         control++;
     }
-    void leerUsuarios(bool cargo){
+    void leerUsuarios(bool cargo) {
         for (int i = 0; i < control; i++) {
-            cout<<listaUsuario[i].toString(cargo)<<endl;
+            cout << listaUsuario[i].toString() << endl;
+        }
+    }
+    void leerUsuarios(){
+        for (int i = 0; i < control; i++) {
+            cout<<listaUsuario[i].toString()<<endl;
+        }
+    }
+
+    void iniciarSesion(int contrasena){
+        for(int i=0;i<control;i++){
+            listaUsuario[i].getId();
+            if(listaUsuario[i].getId()==contrasena){
+
+            }
         }
     }
 };
+
 #endif //GRUPO1_AC2_RECURSO1_H

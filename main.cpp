@@ -49,6 +49,8 @@ void menuRegistrarse() {
     string nombre, apellido;
     int numU;
     bool cargo;
+    int id;
+
     while (seguir2) {
         int decisionCargo;
         cout << "Que cargo vas a ostentar?" << endl;
@@ -56,9 +58,11 @@ void menuRegistrarse() {
         cout << "2. Alumno" << endl;
         cout << "3. Salir" << endl;
         cin >> decisionCargo;
-        int id = rand() % 1000 + 1;
+
+
         switch (decisionCargo) {
             case 1:
+                id = rand() % 1000 + 1;
                 cargo = true;
                 cout << "Introduce tu nombre" << endl;
                 cin >> nombre;
@@ -68,9 +72,10 @@ void menuRegistrarse() {
                 cin >> numU;
                 cout << "Tu id es el siguiente: " << id << ". Guardalo para iniciar sesion" << endl;
                 pcyl->addUsuario(Profesor(nombre, apellido, numU, id));
-                pcyl->leerUsuarios(cargo);
+                pcyl->leerUsuarios();
                 break;
             case 2:
+                id = rand() % 1000 + 1;
                 cargo = false;
                 cout << "Introduce tu nombre" << endl;
                 cin >> nombre;
@@ -80,7 +85,7 @@ void menuRegistrarse() {
                 cin >> numU;
                 cout << "Tu id es el siguiente: " << id << " Guardalo para iniciar sesion" << endl;
                 pcyl->addUsuario(Alumno(nombre, apellido, numU, Profesor("", "", 0, 0), id));
-                pcyl->leerUsuarios(cargo);
+                pcyl->leerUsuarios();
                 break;
             case 3:
                 seguir2 = false;
@@ -90,6 +95,15 @@ void menuRegistrarse() {
                 break;
         }
     }
+}
+void menuIniciarSesion(){
+    RegistroYLogin ryl = RegistroYLogin();
+    RegistroYLogin* ryl1 = &ryl;
+    int contrasena;
+    cout<<"Introduce tu id para iniciar sesion"<<endl;
+    cin>>contrasena;
+    ryl1->iniciarSesion(contrasena);
+
 }
 
 void menuGestionEstudiantes(){
@@ -103,6 +117,7 @@ void menuGestionEstudiantes(){
             menuRegistrarse();
             break;
         case 2:
+            menuIniciarSesion();
             break;
         default:
             cout<<"Opcion erronea"<<endl;
