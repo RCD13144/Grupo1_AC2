@@ -5,21 +5,32 @@
 #include <random>
 using namespace std;
 void menuCalculadora();
-void menuGestionUsuarios();
+void menuRegistroEInicio();
 void menuJuego();
 int main() {
+    menuRegistroEInicio();
+    return 0;
+}
+void menuJuego(){
+    Juego juego = Juego();
+    juego.menuJuego();
+}
+/**
+ * Menus para recurso 1
+ */
+
+void menuGeneral(){
     int decision;
     bool salir = false;
+    cout << "Que quieres hacer" << endl;
+    cout << "1. Gestionar usuarios" << endl;
+    cout << "2. Calculadora Avanzada" << endl;
+    cout << "3. Juego" << endl;
+    cout << "4. Salir del programa" << endl;
+    cin >> decision;
     while(!salir) {
-        cout << "Que quieres hacer" << endl;
-        cout << "1. Gestionar usuarios" << endl;
-        cout << "2. Calculadora Avanzada" << endl;
-        cout << "3. Juego" << endl;
-        cout << "4. Salir del programa" << endl;
-        cin >> decision;
         switch (decision) {
             case 1:
-                menuGestionUsuarios();
                 break;
             case 2:
                 menuCalculadora();
@@ -35,26 +46,30 @@ int main() {
                 break;
         }
     }
-    return 0;
 }
-void menuJuego(){
-    Juego juego = Juego();
-    juego.menuJuego();
-}
-/**
- * Menus para recurso 1
- */
 
-void menuGestionUsuarios(){
+void menuRegistroEInicio(){
     int decisionLogin;
     bool seguir2;
     cout<<"Que quieres hacer?"<<endl;
     cout<<"1. Registrar nuevos usuarios"<<endl;
-    cout<<"2. Iniciar sesion como un usuario"<<endl;
+    cout<<"2. Iniciar sesion como un alumno"<<endl;
+    cout<<"3. Iniciar sesion como un profesor"<<endl;
+    cout<<"4. Salir"<<endl;
     cin>>decisionLogin;
     string nombre;
     string apellido;
     int numUsuario;
+    int numAlumnos;
+    srand(time(0));
+    int id = rand() % 1000 + 1;
+    int contrasena;
+    Profesor p = Profesor(nombre, apellido, numUsuario,id,numAlumnos);
+    Profesor* pp = &p;
+    Alumno a = Alumno(nombre, apellido, numUsuario, id);
+    Alumno* pa = &a;
+    RegistroYLogin ryl = RegistroYLogin();
+    RegistroYLogin* pryl = &ryl;
     while(seguir2) {
         switch (decisionLogin) {
             case 1:
@@ -72,19 +87,35 @@ void menuGestionUsuarios(){
                         cin >> apellido;
                         cout << "Introduce tu numero de usuario" << endl;
                         cin >> numUsuario;
-                        Profesor p = Profesor(nombre, apellido, numUsuario,);
-
+                        cout<<"Cuantos alumnos va a haber en tu clase"<<endl;
+                        cin>>numAlumnos;
+                        p = Profesor(nombre, apellido, numUsuario, id, numAlumnos);
                         break;
                     case 2:
+                        cout << "Introduce tu nombre" << endl;
+                        cin >> nombre;
+                        cout << "Introduce tu apellido" << endl;
+                        cin >> apellido;
+                        cout << "Introduce tu numero de usuario" << endl;
+                        cin >> numUsuario;
+                        a = Alumno(nombre, apellido, numUsuario, id);
                         break;
                     case 3:
                         seguir2 = false;
                         break;
+                    default:
+                        cout<<"Opcion erronea"<<endl;
+                        break;
                 }
                 break;
             case 2:
+                cout<<"Introduce tu id"<<endl;
+                cin>>contrasena;
+                pryl->iniciarSesionAlumno(contrasena);
+                cout<<"Quieres meterle una actividad?"<<endl;
                 break;
             case 3:
+
                 break;
             case 4:
                 break;

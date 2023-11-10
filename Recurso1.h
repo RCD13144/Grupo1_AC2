@@ -294,12 +294,14 @@ public:
 class Profesor : public Usuario{
 private:
     int control;
+    int tamanoClase;
     Dinarray<Alumno>* pdin;
 public:
     Profesor() : Usuario(){
     }
-    Profesor(string n, string a, int numU, int id, int tamanoClase) : Usuario(n,a,numU,id){
+    Profesor(string n, string a, int numU, int id, int tamClase) : Usuario(n,a,numU,id){
         Profesor::control = 0;
+        Profesor::tamanoClase = tamClase;
         pdin = new Dinarray<Alumno>(tamanoClase);
     }
     void addAlumno(Alumno a){
@@ -307,9 +309,14 @@ public:
             cout << "El alumno ya tiene un profesor" << endl;
         }
         else{
-            a.setTieneProfesor(true);
-            pdin->establecerElemento(a, control);
-            control++;
+            if(control >= tamanoClase) {
+                cout<<"No se pueden aniadir mas alumnos a esta clase"<<endl;
+            }
+            else{
+                a.setTieneProfesor(true);
+                pdin->establecerElemento(a, control);
+                control++;
+            }
         }
     }
     void verAlumnos(){
