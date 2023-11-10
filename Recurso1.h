@@ -9,21 +9,28 @@
 using namespace std;
 
 class Usuario{
+public:
+    enum TipoUsuario { PROFESOR, ALUMNO };
 private:
     string nombre, apellido;
     bool cargo;
     int numUsuario;
     int id;
+    TipoUsuario tipoUsuario;
 public:
-    Usuario(string n, string a, int numU, int id){
+    Usuario(string n, string a, int numU, int id, TipoUsuario tu){
         Usuario::nombre = n;
         Usuario::apellido = a;
         Usuario::numUsuario = numU;
         Usuario::id = id;
+        Usuario::tipoUsuario = tu;
     }
     Usuario(){}
     string getNombre(){
         return nombre;
+    }
+    TipoUsuario getTipoUsuario() const {
+        return cargo ? PROFESOR : ALUMNO;
     }
     string getApellido(){
         return apellido;
@@ -59,7 +66,7 @@ private:
 public:
     Profesor() : Usuario(){
     }
-    Profesor(string n, string a, int numU, int id) : Usuario(n,a,numU,id){
+    Profesor(string n, string a, int numU, int id, TipoUsuario tu) : Usuario(n,a,numU,id, tu){
         Profesor::control = 0;
     }
     void addAlumno(Alumno* a){
@@ -78,22 +85,14 @@ public:
 class Alumno : public Usuario{
 private:
     Profesor profesor;
-    Profesor listaProfesor[1];
 public:
     Alumno() : Usuario(){
     }
-    Alumno(string n, string a, int numU, Profesor p, int id): Usuario(n,a,numU, id){
+    Alumno(string n, string a, int numU, Profesor p, int id, TipoUsuario tu): Usuario(n,a,numU, id, tu){
         profesor = p;
     }
     string toString(){
         return "Alumno = [nombre = " + getNombre() + ", apellido = " + getApellido() + ", numUsuario = " + to_string(getNumUsuario()) + ", " + profesor.toString() + ", id = " +to_string(getId())+ "]";
-    }
-    void asociarProfesor(Profesor p){
-        Alumno::profesor = p;
-        listaProfesor[0] = p;
-    }
-    void verMiProfesor(){
-        cout<<listaProfesor[0].toString()<<endl;
     }
 };
 class RegistroYLogin : public Usuario{
@@ -122,12 +121,14 @@ public:
             cout<<listaUsuario[i].toString()<<endl;
         }
     }
-
     void iniciarSesion(int contrasena){
         for(int i=0;i<control;i++){
-            listaUsuario[i].getId();
             if(listaUsuario[i].getId()==contrasena){
+                if (listaUsuario[i].getTipoUsuario() == Usuario::PROFESOR) {
 
+                }else{
+
+                }
             }
         }
     }
