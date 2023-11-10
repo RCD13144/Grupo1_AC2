@@ -1,123 +1,67 @@
 #include <iostream>
 #include "Recurso1.h"
 #include "Recurso3.h"
+#include "Recurso5.h"
 #include <random>
 using namespace std;
 void menuCalculadora();
-void menuGestionEstudiantes();
+void menuGestionUsuarios();
+void menuJuego();
 int main() {
     int decision;
-    bool seguir = true;
-    while(seguir) {
+    bool salir = false;
+    while(!salir) {
         cout << "Que quieres hacer" << endl;
-        cout << "1. Gestionar estudiantes" << endl;
-        cout << "2. Mochila de material digital" << endl;
-        cout << "3. Calculadora Avanzada" << endl;
-        cout << "4. Dar de alta o baja algun usuario" << endl;
-        cout << "5. Juego" << endl;
-        cout << "6. Salir del programa" << endl;
+        cout << "1. Gestionar usuarios" << endl;
+        cout << "2. Calculadora Avanzada" << endl;
+        cout << "3. Juego" << endl;
+        cout << "4. Salir del programa" << endl;
         cin >> decision;
         switch (decision) {
             case 1:
-                menuGestionEstudiantes();
+                menuGestionUsuarios();
                 break;
             case 2:
-                break;
-            case 3:
                 menuCalculadora();
                 break;
+            case 3:
+                menuJuego();
+                break;
             case 4:
-                break;
-            case 5:
-                break;
-            case 6:
-                seguir = false;
+                salir = true;
                 break;
             default:
+                cout << "Opcion incorrecta" << endl;
                 break;
         }
-        return 0;
     }
+    return 0;
+}
+void menuJuego(){
+    Juego juego = Juego();
+    juego.menuJuego();
 }
 /**
  * Menus para recurso 1
  */
-void menuRegistrarse() {
-    bool seguir2 = true;
-    RegistroYLogin cyl = RegistroYLogin();
-    RegistroYLogin* pcyl = &cyl;
-    string nombre, apellido;
-    int numU;
-    bool cargo;
-    int id;
 
-    while (seguir2) {
-        int decisionCargo;
-        cout << "Que cargo vas a ostentar?" << endl;
-        cout << "1. Profesor" << endl;
-        cout << "2. Alumno" << endl;
-        cout << "3. Salir" << endl;
-        cin >> decisionCargo;
-
-
-        switch (decisionCargo) {
-            case 1:
-                id = rand() % 1000 + 1;
-                cargo = true;
-                cout << "Introduce tu nombre" << endl;
-                cin >> nombre;
-                cout << "Introduce tu apellido" << endl;
-                cin >> apellido;
-                cout << "Introduce tu numero de usuario" << endl;
-                cin >> numU;
-                cout << "Tu id es el siguiente: " << id << ". Guardalo para iniciar sesion" << endl;
-                pcyl->addUsuario(Profesor(nombre, apellido, numU, id));
-                pcyl->leerUsuarios();
-                break;
-            case 2:
-                id = rand() % 1000 + 1;
-                cargo = false;
-                cout << "Introduce tu nombre" << endl;
-                cin >> nombre;
-                cout << "Introduce tu apellido" << endl;
-                cin >> apellido;
-                cout << "Introduce tu numero de usuario" << endl;
-                cin >> numU;
-                cout << "Tu id es el siguiente: " << id << " Guardalo para iniciar sesion" << endl;
-                pcyl->addUsuario(Alumno(nombre, apellido, numU, Profesor("", "", 0, 0), id));
-                pcyl->leerUsuarios();
-                break;
-            case 3:
-                seguir2 = false;
-                break;
-            default:
-                cout << "Opcion erronea" << endl;
-                break;
-        }
-    }
-}
-void menuIniciarSesion(){
-    RegistroYLogin ryl = RegistroYLogin();
-    RegistroYLogin* ryl1 = &ryl;
-    int contrasena;
-    cout<<"Introduce tu id para iniciar sesion"<<endl;
-    cin>>contrasena;
-    ryl1->iniciarSesion(contrasena);
-
-}
-
-void menuGestionEstudiantes(){
+void menuGestionUsuarios(){
     int decisionLogin;
+
     cout<<"Que quieres hacer?"<<endl;
-    cout<<"1. Registrarse"<<endl;
-    cout<<"2. Iniciar sesion"<<endl;
+    cout<<"1. Registrar nuevos usuarios"<<endl;
+    cout<<"2. Iniciar sesion como un usuario"<<endl;
     cin>>decisionLogin;
     switch(decisionLogin){
         case 1:
-            menuRegistrarse();
+
             break;
         case 2:
             menuIniciarSesion();
+            break;
+        case 3:
+            break;
+        case 4:
             break;
         default:
             cout<<"Opcion erronea"<<endl;
@@ -125,7 +69,6 @@ void menuGestionEstudiantes(){
     }
 
 }
-
 /**
  * Menus para recurso 3
  */
