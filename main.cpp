@@ -48,7 +48,7 @@ void menuRegistrarse() {
     RegistroYLogin* pcyl = &cyl;
     string nombre, apellido;
     int numU;
-
+    bool cargo;
     while (seguir2) {
         int decisionCargo;
         cout << "Que cargo vas a ostentar?" << endl;
@@ -57,8 +57,6 @@ void menuRegistrarse() {
         cout << "3. Salir" << endl;
         cin >> decisionCargo;
         int id = rand() % 1000 + 1;
-        bool cargo;
-
         switch (decisionCargo) {
             case 1:
                 cargo = true;

@@ -40,9 +40,6 @@ public:
     void setCargo(bool cargo){
         Usuario::cargo = cargo;
     }
-    string conocerCargo(){
-
-    }
     string toString(bool cargo){
         stringstream  ss;
         ss<<getNumUsuario();
@@ -50,7 +47,7 @@ public:
         ss<<getId();
         string idAString = ss.str();
         string valor;
-        if (cargo=true){
+        if (cargo == true){
             valor = "Profesor";
         }
         else{
@@ -76,8 +73,11 @@ public:
     }
     void verAlumnos(){
         for(int i=0;i<8;i++){
-            cout<<listaAlumnos[i]<<endl;
+            cout<< listaAlumnos[i]<<endl;
         }
+    }
+    string toString(){
+        return "Profesor = [nombre = " + getNombre() + ", apellido = " + getApellido() + ", numUsuario = " + to_string(getNumUsuario()) + ", id = " + to_string(getId()) + "]";
     }
 };
 class Alumno : public Usuario{
@@ -87,6 +87,10 @@ public:
     Alumno() : Usuario(){
     }
     Alumno(string n, string a, int numU, Profesor p, int id): Usuario(n,a,numU, id){
+        profesor = p;
+    }
+    string toString(){
+        return "Alumno = [nombre = " + getNombre() + ", apellido = " + getApellido() + ", numUsuario = " + to_string(getNumUsuario()) + ", " + profesor.toString() + ", id = " +to_string(getId())+ "]";
     }
 };
 class RegistroYLogin : public Usuario{
@@ -104,12 +108,8 @@ public:
         control++;
     }
     void leerUsuarios(bool cargo){
-        for (int i = 0; i < 10; i++) {
-            if (i < control) {
-                cout<<listaUsuario[i].toString(cargo)<<endl;
-            } else {
-                cout<<"Vacio"<< endl;
-            }
+        for (int i = 0; i < control; i++) {
+            cout<<listaUsuario[i].toString(cargo)<<endl;
         }
     }
 };
